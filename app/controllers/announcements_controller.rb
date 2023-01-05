@@ -1,4 +1,7 @@
 class AnnouncementsController < ApplicationController
+    rescue_from ActiveRecord::RecordInvalid, with: :render_unproccessable_entity_response
+    rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+    
     def index
         render json: Announcement.all, status: :ok
     end
@@ -26,6 +29,14 @@ class AnnouncementsController < ApplicationController
     end
 
     private
+
+    def render_unproccessable_entity_response
+        render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
+    end
+
+    def record_not_found
+        render json: {errors: "Record not found"}, status: :not_found
+    end
 
     def find_announcement
         Announcement.find(params[:id])
