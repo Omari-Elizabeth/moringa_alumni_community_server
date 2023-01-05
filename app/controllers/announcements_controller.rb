@@ -20,7 +20,9 @@ class AnnouncementsController < ApplicationController
     end
 
     def destroy 
-
+        announcement = find_announcement
+        announcement.destroy
+        head :no_content, status: :no_content
     end
 
     private
