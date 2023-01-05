@@ -1,7 +1,7 @@
 class AnnouncementsController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :render_unproccessable_entity_response
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-    
+
     def index
         render json: Announcement.all, status: :ok
     end
@@ -19,12 +19,12 @@ class AnnouncementsController < ApplicationController
     def update 
         announcement = find_announcement
         announcement.update!(announcement_params)
-        render json: announcement
+        render json: announcement, status: :ok
     end
 
     def destroy 
         announcement = find_announcement
-        announcement.destroy
+        announcement.destroy!
         head :no_content, status: :no_content
     end
 

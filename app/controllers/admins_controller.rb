@@ -11,13 +11,13 @@ class AdminsController < ApplicationController
     def update 
         admin = find_admin
         admin.update!(admin_params)
-        render json: admin
+        render json: admin, status: :ok
     end
 
     private
 
     def find_admin
-        admin.find(params[:id])
+        Admin.find(params[:id])
     end
 
     def admin_params
