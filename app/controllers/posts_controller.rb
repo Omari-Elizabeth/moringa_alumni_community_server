@@ -5,20 +5,20 @@ class PostsController < ApplicationController
     # GET /posts
     # GET /posts.json
     def index
-      @posts = Post.all
+      posts = Post.all
       render json: posts
     end
   
     
     def show
-      @post = Post.find(params[:id])
+      post = Post.find(params[:id])
       render json: post
     end
   
     # GET /posts/new
     def new
-      @post = Post.new
-      @post.user_id = current_user.id
+      post = Post.new
+      post.user_id = current_user.id
     end
   
     # GET /posts/1/edit
@@ -28,9 +28,9 @@ class PostsController < ApplicationController
     # POST /posts
     # POST /posts.json
     def create
-      @post = Post.new(post_params)
-      @post.save
-      redirect_to @post
+      post = Post.new(post_params)
+      post.save
+      redirect_to post
     end
   
     # PATCH/PUT /posts/1
@@ -46,14 +46,16 @@ class PostsController < ApplicationController
     # DELETE /posts/1
     # DELETE /posts/1.json
     def destroy
-        find_params.destroy
+      post = Post.find(params[:id]) 
+      post.destroy
+      render json: post
+    end
     
-      end
 
   
     private
       def find_params
-        @post = Post.find(params[:id])
+        post = Post.find(params[:id])
       end
 
 
