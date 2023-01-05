@@ -72,3 +72,5 @@ group :test do
 end
 
 gem "rspec-rails", "~> 6.0"
+
+gem 'active_model_serializers'
