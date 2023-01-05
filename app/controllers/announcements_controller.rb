@@ -1,20 +1,22 @@
 class AnnouncementsController < ApplicationController
     def index
-        render json: Announcement.all
+        render json: Announcement.all, status: :ok
     end
 
     def show
         announcement = find_announcement
-        render json: announcement
+        render json: announcement, status: :ok
     end
 
     def create
         announcement = Announcement.create!(announcement_params)
-        render json: announcement
+        render json: announcement, status: :created
     end
 
     def update 
-        a
+        announcement = find_announcement
+        announcement.update!(announcement_params)
+        render json: announcement
     end
 
     def destroy 
